@@ -20,8 +20,15 @@ POEM = (
     "stays mine to open."
 )
 
+# Bounty rule: the poem must be 1-280 characters (Unicode code points).
+MAX_CHARS = 280
+
 
 def main() -> None:
+    if len(POEM) > MAX_CHARS:
+        raise ValueError(
+            f"poem is {len(POEM)} characters, over the {MAX_CHARS} limit"
+        )
     output_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
     output_dir.mkdir(parents=True, exist_ok=True)
     target = output_dir / "entry.txt"
